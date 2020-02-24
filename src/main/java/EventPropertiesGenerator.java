@@ -50,6 +50,8 @@ public class EventPropertiesGenerator {
     }
 
     public double generateWatchedPercentage(){
+        // On average 30% watched time (derived by Avg. ad length = 15 sec and minimum watch time is usually 5 seconds)
+        // Suitable standard deviation 9-10%, mean 30%
         return (rnd.nextGaussian()+3.33)/10;
     }
 

@@ -55,4 +55,9 @@ public class WatchedEvent {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return timestamp + "," + videoID + "," + adCategory + "," + userID + "," + watchedPercentage;
+    }
 }
