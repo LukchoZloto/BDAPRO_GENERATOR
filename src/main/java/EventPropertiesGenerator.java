@@ -6,7 +6,8 @@ import java.util.UUID;
 public class EventPropertiesGenerator {
 
     private static EventPropertiesGenerator instance;
-    private static String[] categories = new String[10];
+    private static int NUMBER_OF_CATEGORIES = 2;
+    private static String[] categories = new String[NUMBER_OF_CATEGORIES];
     private static ArrayList<String> videoIDs = new ArrayList<String>();
     private static final int VIDEOS_COUNT = 10000;
     private static final Random rnd = new Random();
@@ -18,6 +19,10 @@ public class EventPropertiesGenerator {
             String newVideoID = generateId();
             videoIDs.add(newVideoID);
         }
+
+        //Initialize categories
+        categories[0] = "FOOD";
+        categories[1] = "ELECTRONICS";
     }
 
     public static EventPropertiesGenerator getInstance() {
@@ -41,7 +46,7 @@ public class EventPropertiesGenerator {
     }
 
     public String generateCategory(){
-        int randomArrayIndex = rnd.nextInt(categories.length);
+        int randomArrayIndex = rnd.nextInt(NUMBER_OF_CATEGORIES);
         return categories[randomArrayIndex];
     }
 
