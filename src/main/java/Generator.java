@@ -10,6 +10,7 @@ public class Generator {
 
     public static void main(String[] args){
         for(int i = 0 ; i < NUMBER_OF_THREADS ; i++){
+
             RateLimiter rateLimiter = RateLimiter.create(REQUEST_RATE);
             Thread currentThread = new GeneratorThread(rateLimiter);
             THREAD_POOL.add(currentThread);
