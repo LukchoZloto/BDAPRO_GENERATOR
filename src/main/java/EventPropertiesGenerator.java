@@ -6,17 +6,19 @@ import java.util.UUID;
 public class EventPropertiesGenerator {
 
     private static EventPropertiesGenerator instance;
-    private static int NUMBER_OF_CATEGORIES = 2;
+    private static int NUMBER_OF_CATEGORIES = 4;
     private static String[] adCategories = new String[NUMBER_OF_CATEGORIES];
-    private static ArrayList<String> videoIDs = new ArrayList<String>();
-    private static final int VIDEOS_COUNT = 100;
+    private static final int AD_COUNT = 100;
     private static final Random rnd = new Random();
 
     private EventPropertiesGenerator() {
 
         //Initialize categories
-        adCategories[0] = "FOOD";
+        adCategories[0] = "ENTERTAINMENT";
         adCategories[1] = "ELECTRONICS";
+        adCategories[2] = "NUTRITION";
+        adCategories[3] = "FITNESS";
+        adCategories[4] = "SELF-HELP";
     }
 
     public static EventPropertiesGenerator getInstance() {
@@ -34,8 +36,8 @@ public class EventPropertiesGenerator {
         return UUID.randomUUID().toString();
     }
 
-    public String generateVideoId(){
-        return Integer.toString(rnd.nextInt(VIDEOS_COUNT));
+    public String generateAdId(){
+        return Integer.toString(rnd.nextInt(AD_COUNT));
     }
 
     public String generateCategory(){

@@ -3,25 +3,25 @@ package models;
 public class WatchedEvent {
 
     private long timestamp;
-    private String videoID;
+    private String adID;
     private String adCategory;
     private String userID;
     private double watchedPercentage;
 
-    public WatchedEvent(long timestamp, String videoID, String adCategory, String userID, double watchedPercentage) {
+    public WatchedEvent(long timestamp, String adID, String adCategory, String userID, double watchedPercentage) {
         this.timestamp = timestamp;
-        this.videoID = videoID;
+        this.adID = adID;
         this.adCategory = adCategory;
         this.userID = userID;
         this.watchedPercentage = watchedPercentage;
     }
 
-    public String getVideoID() {
-        return videoID;
+    public String getAdID() {
+        return adID;
     }
 
-    public void setVideoID(String videoID) {
-        this.videoID = videoID;
+    public void setAdID(String adID) {
+        this.adID = adID;
     }
 
     public String getAdCategory() {
@@ -58,6 +58,6 @@ public class WatchedEvent {
 
     @Override
     public String toString() {
-        return timestamp + "," + videoID + "," + adCategory + "," + userID + "," + watchedPercentage;
+        return timestamp + "," + adID + "," + adCategory + "," + userID + "," + watchedPercentage;
     }
 }

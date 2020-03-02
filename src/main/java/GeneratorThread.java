@@ -54,14 +54,14 @@ class GeneratorThread extends Thread {
 
             //Generate new watched event
             long newTimestamp = EPGenerator.generateTimestamp();
-            String newVideoID = EPGenerator.generateVideoId();
+            String newAdID = EPGenerator.generateAdId();
             String newCategory = EPGenerator.generateCategory();
             String newUserID = EPGenerator.generateUserId();
             double newWatchedPercentage = EPGenerator.generateWatchedPercentage();
-            WatchedEvent currentWatchedEvent = new WatchedEvent(newTimestamp, newVideoID, newCategory, newUserID, newWatchedPercentage);
+            WatchedEvent currentWatchedEvent = new WatchedEvent(newTimestamp, newAdID, newCategory, newUserID, newWatchedPercentage);
 
             // Create Kafka watch event record and send it to Kafka
-            ProducerRecord<String, String> watched_record = new ProducerRecord<String, String>(KafkaContants.TOPIC_NAME, currentWatchedEvent.getVideoID(), currentWatchedEvent.toString());
+            ProducerRecord<String, String> watched_record = new ProducerRecord<String, String>(KafkaContants.TOPIC_NAME, currentWatchedEvent.getAdID(), currentWatchedEvent.toString());
             rateLimiterRef.acquire();
             producer.send(watched_record);
 
@@ -73,10 +73,10 @@ class GeneratorThread extends Thread {
             if (randomNumber < CLICKED_EVENT_PROBABILITY) {
                 // Generate clicked event
                 long clickedTimestamp = EPGenerator.generateTimestamp();
-                currentClickEvent = new ClickedEvent(clickedTimestamp, newVideoID, newCategory, newUserID);
+                currentClickEvent = new ClickedEvent(clickedTimestamp, newAdID, newCategory, newUserID);
 
                 // Create Kafka click event record and send it to Kafka
-                ProducerRecord<String, String> clicked_record = new ProducerRecord<String, String>(KafkaContants.TOPIC_NAME, currentClickEvent.getVideoID(), currentClickEvent.toString());
+                ProducerRecord<String, String> clicked_record = new ProducerRecord<String, String>(KafkaContants.TOPIC_NAME, currentClickEvent.getAdID(), currentClickEvent.toString());
                 rateLimiterRef.acquire();
                 producer.send(clicked_record);
             }

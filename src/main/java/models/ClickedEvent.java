@@ -2,25 +2,25 @@ package models;
 
 public class ClickedEvent {
     private long timestamp;
-    private String videoID;
+    private String adID;
     private String adCategory;
     private String userID;
 
 
-    public ClickedEvent(long timestamp, String videoID, String adCategory, String userID) {
+    public ClickedEvent(long timestamp, String adID, String adCategory, String userID) {
         this.timestamp = timestamp;
-        this.videoID = videoID;
+        this.adID = adID;
         this.adCategory = adCategory;
         this.userID = userID;
 
     }
 
-    public String getVideoID() {
-        return videoID;
+    public String getAdID() {
+        return adID;
     }
 
-    public void setVideoID(String videoID) {
-        this.videoID = videoID;
+    public void setAdID(String adID) {
+        this.adID = adID;
     }
 
     public String getAdCategory() {
@@ -49,6 +49,6 @@ public class ClickedEvent {
 
     @Override
     public String toString() {
-        return timestamp + "," + videoID + "," + adCategory + "," + userID;
+        return timestamp + "," + adID + "," + adCategory + "," + userID;
     }
 }
