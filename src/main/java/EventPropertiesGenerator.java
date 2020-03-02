@@ -6,7 +6,7 @@ import java.util.UUID;
 public class EventPropertiesGenerator {
 
     private static EventPropertiesGenerator instance;
-    private static int NUMBER_OF_CATEGORIES = 4;
+    private static int NUMBER_OF_CATEGORIES = 5;
     private static String[] adCategories = new String[NUMBER_OF_CATEGORIES];
     private static final int AD_COUNT = 100;
     private static final Random rnd = new Random();
