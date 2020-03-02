@@ -7,22 +7,16 @@ public class EventPropertiesGenerator {
 
     private static EventPropertiesGenerator instance;
     private static int NUMBER_OF_CATEGORIES = 2;
-    private static String[] categories = new String[NUMBER_OF_CATEGORIES];
+    private static String[] adCategories = new String[NUMBER_OF_CATEGORIES];
     private static ArrayList<String> videoIDs = new ArrayList<String>();
-    private static final int VIDEOS_COUNT = 10000;
+    private static final int VIDEOS_COUNT = 100;
     private static final Random rnd = new Random();
 
     private EventPropertiesGenerator() {
 
-        // Generates N videoIDs and stores them in videoIDs array
-        for(int i = 0 ; i < VIDEOS_COUNT; i++){
-            String newVideoID = generateId();
-            videoIDs.add(newVideoID);
-        }
-
         //Initialize categories
-        categories[0] = "FOOD";
-        categories[1] = "ELECTRONICS";
+        adCategories[0] = "FOOD";
+        adCategories[1] = "ELECTRONICS";
     }
 
     public static EventPropertiesGenerator getInstance() {
@@ -41,13 +35,12 @@ public class EventPropertiesGenerator {
     }
 
     public String generateVideoId(){
-        int randomArrayIndex = rnd.nextInt(VIDEOS_COUNT);
-        return videoIDs.get(randomArrayIndex);
+        return Integer.toString(rnd.nextInt(VIDEOS_COUNT));
     }
 
     public String generateCategory(){
         int randomArrayIndex = rnd.nextInt(NUMBER_OF_CATEGORIES);
-        return categories[randomArrayIndex];
+        return adCategories[randomArrayIndex];
     }
 
     public String generateUserId(){
@@ -59,5 +52,7 @@ public class EventPropertiesGenerator {
         // Suitable standard deviation 9-10%, mean 30%
         return (rnd.nextGaussian()+3.33)/10;
     }
+
+
 
 }

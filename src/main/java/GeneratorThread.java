@@ -13,16 +13,24 @@ import java.util.Random;
 
 class GeneratorThread extends Thread {
 
-    static EventPropertiesGenerator EPGenerator = EventPropertiesGenerator.getInstance();
+    private static String KAFKA_CLIENT_NAME;
+    private static String KAFKA_IP;
+    private static String KAFKA_PORT;
+    private static int NUMBER_OF_EVENTS;
+
+    EventPropertiesGenerator EPGenerator = EventPropertiesGenerator.getInstance();
     private final static double  CLICKED_EVENT_PROBABILITY = 0.024;
     private static volatile int COUNTER = 0;
     private static long TIMESTAMP_START;
     private static long TIMESTAMP_END;
-    private static int NUMBER_OF_EVENTS = 500000;
     private static RateLimiter rateLimiterRef;
 
-    public GeneratorThread(RateLimiter rateLimiterRef){
+    public GeneratorThread(RateLimiter rateLimiterRef, String kafkaClientName, String kafkaIp, String kafkaPort, int numberOfEvents){
         this.rateLimiterRef = rateLimiterRef;
+        this.KAFKA_CLIENT_NAME = kafkaClientName;
+        this.KAFKA_IP = kafkaIp;
+        this.KAFKA_PORT = kafkaPort;
+        this.NUMBER_OF_EVENTS = numberOfEvents;
     }
 
     public void run() {
@@ -82,6 +90,7 @@ class GeneratorThread extends Thread {
         // Calculate Throughput
         TIMESTAMP_END = System.currentTimeMillis();
         long elapsedTime = (TIMESTAMP_END-TIMESTAMP_START)/1000;
+        elapsedTime = elapsedTime == 0 ? 1 : elapsedTime; // If the experiment runs very fast we don't want to divide by zero on the next line
         long throughput = NUMBER_OF_EVENTS /elapsedTime;
         System.out.println("THROUGHPUT: "+ throughput);
 
@@ -91,8 +100,8 @@ class GeneratorThread extends Thread {
 
     public static Producer<String, String> createProducer() {
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaContants.KAFKA_BROKERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, KafkaContants.CLIENT_ID);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_IP+":"+KAFKA_PORT);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, KAFKA_CLIENT_NAME);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         return new KafkaProducer(props);
