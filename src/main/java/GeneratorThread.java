@@ -45,12 +45,6 @@ class GeneratorThread extends Thread {
 
         while (j > 0) {
             j--;
-            // Measure multithreaded latency
-            //COUNTER++;
-            //if(COUNTER==100){
-            //    TIMESTAMP_END = System.currentTimeMillis();
-            //    System.out.println(TIMESTAMP_END-TIMESTAMP_START);
-            //}
 
             //Generate new watched event
             long newTimestamp = EPGenerator.generateTimestamp();
@@ -80,11 +74,6 @@ class GeneratorThread extends Thread {
                 rateLimiterRef.acquire();
                 producer.send(clicked_record);
             }
-//            try {
-//                sleep(1);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
 
         // Calculate Throughput
